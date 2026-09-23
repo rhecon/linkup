@@ -1,0 +1,37 @@
+{% extends 'meetup/base/base.html' %}
+{% load static %}
+
+{% block title %}Meetups!{% endblock %}
+
+{% block site_css %}
+    <link rel="stylesheet" href="{% static 'meetup/styles/all-meetups.css' %}">
+{% endblock %}
+
+
+<h1>{% block main_heading %}We got great meetups coming up!{% endblock %}</h1>
+<p>{% block header_content %}Find the one that best suits your needs!{% endblock %}</p>
+
+
+{% block body %}
+    <section>
+        <h2>Upcoming Meetups</h2>
+
+        <ol>
+            {% for meetup_item in meetups %}
+                {% comment %} 
+                    We make the title, location, and slug variable available to the include template using
+                    with title=meetup_item.title location=meetup_item.location slug=meetup_item.slug
+
+                    This is better than using meetup_item.title, meetup_item.location, and meetup_item.slug
+                    because of the following reasons:
+                    I. The include code snippet is meant to be used in other templates, not just this one.
+                        If the template doesn't have meetup, it will cause an error. 
+                        
+                        So it is better to define variables in the include template and make values available to those
+                        variables in the template you are working with 
+                {% endcomment %}
+                {% include 'meetup/includes/meetup-item.html' with title=meetup_item.title location="New York" slug=meetup_item.slug image=meetup_item.image.url %}
+            {% endfor %}
+        </ol>
+    </section>
+{% endblock %}
