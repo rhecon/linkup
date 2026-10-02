@@ -13,7 +13,8 @@
     <section id="confirmation">
         <h2>Meetup Location</h2>
         <p>Thanks for signing up - see you at the meetup!</p>
-        <p>Got questions or can't make it? Please <a href="{{ meetups.organizer_email }}">contact the organizer</a> ahead of time!</p>
+                    {% comment %} "mailto:" opens the mail client of the visitor and starts composing an email to the organizer {% endcomment %}
+        <p>Got questions or can't make it? Please <a href="mailto:{{ meetup.organizer_email }}">contact the organizer</a> ahead of time!</p>
     </section>
 
     <section id="continue">
