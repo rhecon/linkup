@@ -19,9 +19,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views.generic.base import RedirectView
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("meetup.urls")),
+    # If we enter our domain without passing any arguements it redirects to meetups
+    # This automatatically takes us to the meetups page, instead of us manually entering /meetups when loading the page
+    path("", RedirectView.as_view(url="/meetups")),
+    path("meetups/", include("meetup.urls"))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

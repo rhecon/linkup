@@ -71,9 +71,9 @@ def meetup_details(request, meetup_slug):
 
 
 def confirm_registration(request, meetup_slug):
-    meetups = Meetup.objects.all()
+    meetup = Meetup.objects.get(slug=meetup_slug)
     
     return render(request, "meetup/registration-success.html", {
-        'meetups': meetups
+        'organizer_email': meetup.organizer_email
         }
     )
